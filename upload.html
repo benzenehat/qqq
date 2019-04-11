@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- viewport meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <title>SHIKET AI</title>
+
+    <style>
+      #view{
+        width:100vw;
+        height:150vh;
+        background:grey;
+        position:relative;
+      }
+      #screen{
+        background:white;
+        width:414px;
+        height:736px;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        box-shadow:5px 5px 5px;
+
+        padding:0 50px;
+      }
+      #input-number-container{
+        height:200px;
+        width:100%;
+        position:relative;
+        overflow:hidden;
+      }
+      #input-number{
+        position:absolute;
+        display:block;
+        width:100%;
+        top:50%;
+        -ms-transform: translateY(-50%);
+        -webkit-transform : translateY(-50%);
+        transform : translateY(-50%);
+
+        border-radius:10px;
+        background:rgba(200,200,200,0.4);
+
+        text-align:right;
+        font-size:50px;
+        letter-spacing:10px;
+      }
+      #flex-container{
+        display:flex;
+        flex-flow:row wrap;
+        justify-content:space-between;
+        align-content:center;
+
+        background:white;
+        width:100%;
+        height:auto;
+        margin:auto;
+      }
+
+
+      .flex-content{
+        flex-basis:33%;
+        height:100px;
+        position:relative;
+      }
+      .b{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+
+        height:70px;
+        width:70px;
+        border-radius:50%;
+        background:silver;
+        font-weight:800;
+      }
+      .b:active{
+        background:#999999;
+      }
+
+      #calling-screen{
+        position:absolute;
+        background:white;
+        height:100%;
+        width:100%;
+        top:0;
+        left:0;
+        text-align:center;
+
+        padding-top:300px;
+
+        display:none;
+      }
+      #calling-screen>span{
+        vertical-align:middle;
+        font-size:30px;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div id="view">
+        <div id="screen">
+          <div id="input-number-container">
+            <span id="input-number">&nbsp</span>
+          </div>
+          <div id="flex-container">
+            <div class="flex-content">
+              <button class="b" onclick="tap1()">1</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap2()">2</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap3()">3</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap4()">4</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap5()">5</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap6()">6</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap7()">7</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap8()">8</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap9()">9</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tapCancel()">cancel</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tap0()">0</button>
+            </div>
+            <div class="flex-content">
+              <button class="b" onclick="tapCall()">call</button>
+            </div>
+          </div>
+          <div id="calling-screen">
+            <span>
+              ただいま電話中です<br>
+              <button onclick="cancelCalling()">戻る</button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+    <script>
+      var number=0;
+      var audioElem = new Audio();
+      audioElem.src = "ima.m4a";
+
+      function reflectNumber(){
+        var screen_number = document.getElementById("input-number");
+        if(number!=0){
+          screen_number.textContent = number;
+        }else{
+          screen_number.textContent = number;
+        }
+      }
+
+      function tap1(){
+        number = number*10+1;
+        reflectNumber();
+      }
+      function tap2(){
+        number = number*10+2;
+        reflectNumber();
+      }
+      function tap3(){
+        number = number*10+3;
+        reflectNumber();
+      }
+      function tap4(){
+        number = number*10+4;
+        reflectNumber();
+      }
+      function tap5(){
+        number = number*10+5;
+        reflectNumber();
+      }
+      function tap6(){
+        number = number*10+6;
+        reflectNumber();
+      }
+      function tap7(){
+        number = number*10+7;
+        reflectNumber();
+      }
+      function tap8(){
+        number = number*10+8;
+        reflectNumber();
+      }
+      function tap9(){
+        number = number*10+9;
+        reflectNumber();
+      }
+      function tap0(){
+        number = number*10;
+        reflectNumber();
+      }
+      function tapCancel(){
+        number = 0;
+        reflectNumber();
+      }
+
+      function tapCall(){
+        if(number==119){
+          calling_screen = document.getElementById("calling-screen");
+          calling_screen.style.display = "block"
+
+          audioElem.play();
+        }else{
+          alert("電話番号が違います");
+          tapCancel();
+        }
+        
+      }
+      function cancelCalling(){
+        audioElem.pause();
+        calling_screen = document.getElementById("calling-screen");
+        calling_screen.style.display = "none";
+        tapCancel();
+      }
+    </script>
+      
+  </body>
+</html>
