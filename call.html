@@ -12,7 +12,7 @@
 
     <style>
       html{
-        touch-action:none;
+        touch-action:manipulation;
       }
       #view{
         width:100vw;
@@ -180,13 +180,17 @@
 
     <script>
 
+      // 打ち込まれた番号(String)
       var number="";
+
+      // deleteボタン(最初は非表示)
       var deleteButton = document.getElementById("deleteButton");
 
+      //音楽再生のためのオブジェクト
       var audioElem = new Audio();
       audioElem.src = "ima.m4a";
 
-
+      //引数に true もしくは false を指定して delete ボタンの表示を切り替える
       function showDeleteButton(show){
         if(show){
           deleteButton.style.display = "inline-block";
@@ -195,15 +199,41 @@
         }
       }
 
+      // ユーザーが打ち込んだ番号を表示する(同時に delete ボタンの表示非表示を切り替える)
       function reflectNumber(){
         var screen_number = document.getElementById("input-number");
         screen_number.textContent = number;
-        if(number != 0){
+        if(number != ""){
           showDeleteButton(true);
         }else{
           showDeleteButton(false);
         }
       }
+
+      //call ボタンが押されたときの処理
+      function tapCall(){
+        if(number=="119"){
+          calling_screen = document.getElementById("calling-screen");
+          calling_screen.style.display = "block"
+
+          audioElem.play();
+        }else{
+          alert("電話番号が違います");
+          number = "";
+          reflectNumber()
+        }
+      }
+
+      //通話画面を閉じる
+      function cancelCalling(){
+        audioElem.pause();
+        calling_screen = document.getElementById("calling-screen");
+        calling_screen.style.display = "none";
+        number = "";
+        reflectNumber();
+      }
+
+
 
       function tap1(){
         number = number+1;
@@ -255,27 +285,6 @@
       }
       function tapDelete(){
         number = number.slice(0,-1);;
-        reflectNumber();
-      }
-
-      function tapCall(){
-        if(number==119){
-          calling_screen = document.getElementById("calling-screen");
-          calling_screen.style.display = "block"
-
-          audioElem.play();
-        }else{
-          alert("電話番号が違います");
-          number = "";
-          reflectNumber()
-        }
-        
-      }
-      function cancelCalling(){
-        audioElem.pause();
-        calling_screen = document.getElementById("calling-screen");
-        calling_screen.style.display = "none";
-        number = "";
         reflectNumber();
       }
     </script>
