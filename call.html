@@ -16,7 +16,7 @@
       }
       #view{
         width:100vw;
-        height:150vh;
+        height:100vh;
         background:grey;
         position:relative;
       }
@@ -87,12 +87,38 @@
         background:#EEEEEE;
         font-weight:400;
         font-size:45px;
+
+        border:none;
       }
       .b:active{
         background:#999999;
       }
       #callButton{
         background:rgb(59,234,88);
+      }
+      #deleteButton{
+        border-radius:0px;
+        height:40px;
+        width:40px;
+        border-radius:0 10px 10px 0;
+        line-height:35px;
+        font-size:35px;
+        
+        display:none;
+      }
+      #deleteButton:before{
+        position:absolute;
+        content:"";
+        width:0px;
+        height:0px;
+        left:-20px;
+        top:0;
+        background:transparent;
+        border-bottom:20px solid transparent;
+        border-right:20px solid #EEEEEE;
+        border-top:20px solid transparent;
+
+        
       }
 
       #calling-screen{
@@ -165,7 +191,7 @@
               <button id="callButton" class="b" onclick="tapCall()">call</button>
             </div>
             <div class="flex-content">
-              <button id="deleteButton" style="display:none"class="b" onclick="tapDelete()">x</button>
+              <button id="deleteButton" class="b" onclick="tapDelete()">✗</button>
             </div>
           </div>
           <div id="calling-screen">
