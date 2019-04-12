@@ -4,13 +4,11 @@
     <meta charset="utf-8">
 
     <!-- viewport meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 
-    <title>SHIKET AI</title>
+
+    <title>電話アプリ</title>
 
     <style>
       #view{
@@ -21,8 +19,8 @@
       }
       #screen{
         background:white;
-        width:414px;
-        height:736px;
+        width:768px;
+        height:1024px;
         position:absolute;
         top: 50%;
         left: 50%;
@@ -31,7 +29,6 @@
         transform : translate(-50%,-50%);
         box-shadow:5px 5px 5px;
 
-        padding:0 50px;
       }
       #input-number-container{
         height:200px;
@@ -49,28 +46,28 @@
         transform : translateY(-50%);
 
         border-radius:10px;
-        background:rgba(200,200,200,0.4);
+        /*background:rgba(200,200,200,0.4);*/
 
-        text-align:right;
+        text-align:center;
         font-size:50px;
         letter-spacing:10px;
       }
       #flex-container{
         display:flex;
         flex-flow:row wrap;
-        justify-content:space-between;
-        align-content:center;
+        justify-content:flex-start;
+        align-content:space-around;
 
         background:white;
-        width:100%;
-        height:auto;
+        width:60%;
+        height:650px;
         margin:auto;
       }
 
 
       .flex-content{
         flex-basis:33%;
-        height:100px;
+        height:110px;
         position:relative;
       }
       .b{
@@ -81,14 +78,18 @@
         -webkit-transform : translate(-50%,-50%);
         transform : translate(-50%,-50%);
 
-        height:70px;
-        width:70px;
+        height:105px;
+        width:105px;
         border-radius:50%;
-        background:silver;
-        font-weight:800;
+        background:#EEEEEE;
+        font-weight:400;
+        font-size:45px;
       }
       .b:active{
         background:#999999;
+      }
+      #callButton{
+        background:rgb(59,234,88);
       }
 
       #calling-screen{
@@ -116,7 +117,7 @@
     <div id="view">
         <div id="screen">
           <div id="input-number-container">
-            <span id="input-number">&nbsp</span>
+            <span id="input-number"></span>
           </div>
           <div id="flex-container">
             <div class="flex-content">
@@ -147,13 +148,21 @@
               <button class="b" onclick="tap9()">9</button>
             </div>
             <div class="flex-content">
-              <button class="b" onclick="tapCancel()">cancel</button>
+              <button class="b" onclick="tapA()">＊</button>
             </div>
             <div class="flex-content">
               <button class="b" onclick="tap0()">0</button>
             </div>
             <div class="flex-content">
-              <button class="b" onclick="tapCall()">call</button>
+              <button class="b" onclick="tapS()">#</button>
+            </div>
+            <div class="flex-content">
+            </div>
+            <div class="flex-content">
+              <button id="callButton" class="b" onclick="tapCall()">call</button>
+            </div>
+            <div class="flex-content">
+              <button id="deleteButton" style="display:none"class="b" onclick="tapDelete()">x</button>
             </div>
           </div>
           <div id="calling-screen">
@@ -167,61 +176,82 @@
 
 
     <script>
-      var number=0;
+
+      var number="";
+      var deleteButton = document.getElementById("deleteButton");
+
       var audioElem = new Audio();
       audioElem.src = "ima.m4a";
 
+
+      function showDeleteButton(show){
+        if(show){
+          deleteButton.style.display = "inline-block";
+        }else{
+          deleteButton.style.display = "none"
+        }
+      }
+
       function reflectNumber(){
         var screen_number = document.getElementById("input-number");
-        if(number!=0){
-          screen_number.textContent = number;
+        screen_number.textContent = number;
+        if(number != 0){
+          showDeleteButton(true);
         }else{
-          screen_number.textContent = number;
+          showDeleteButton(false);
         }
       }
 
       function tap1(){
-        number = number*10+1;
+        number = number+1;
         reflectNumber();
       }
       function tap2(){
-        number = number*10+2;
+        number = number+2;
         reflectNumber();
       }
       function tap3(){
-        number = number*10+3;
+        number = number+3;
         reflectNumber();
       }
       function tap4(){
-        number = number*10+4;
+        number = number+4;
         reflectNumber();
       }
       function tap5(){
-        number = number*10+5;
+        number = number+5;
         reflectNumber();
       }
       function tap6(){
-        number = number*10+6;
+        number = number+6;
         reflectNumber();
       }
       function tap7(){
-        number = number*10+7;
+        number = number+7;
         reflectNumber();
       }
       function tap8(){
-        number = number*10+8;
+        number = number+8;
         reflectNumber();
       }
       function tap9(){
-        number = number*10+9;
+        number = number+9;
         reflectNumber();
       }
       function tap0(){
-        number = number*10;
+        number = number+0;
         reflectNumber();
       }
-      function tapCancel(){
-        number = 0;
+      function tapA(){
+        number = number + "*";
+        reflectNumber();
+      }
+      function tapS(){
+        number = number + "#";
+        reflectNumber();
+      }
+      function tapDelete(){
+        number = number.slice(0,-1);;
         reflectNumber();
       }
 
@@ -233,7 +263,8 @@
           audioElem.play();
         }else{
           alert("電話番号が違います");
-          tapCancel();
+          number = "";
+          reflectNumber()
         }
         
       }
@@ -241,7 +272,8 @@
         audioElem.pause();
         calling_screen = document.getElementById("calling-screen");
         calling_screen.style.display = "none";
-        tapCancel();
+        number = "";
+        reflectNumber();
       }
     </script>
       
