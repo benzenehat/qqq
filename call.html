@@ -29,6 +29,9 @@
         position:absolute;
         top:0;
         left:0;
+
+        text-align:center;
+
         display:;
       }
       #initial-screen{
@@ -37,13 +40,13 @@
 
 
       .input-number-container{
-        height:250px;
+        height:200px;
         width:100%;
         position:relative;
         overflow:hidden;
       }
       #initial-input-number-container{
-        height:250px;
+        height:200px;
         width:100%;
         position:relative;
         overflow:hidden;
@@ -52,13 +55,14 @@
         position:absolute;
         display:block;
         width:100%;
-        top:100px;
+        /*top:100px;*?
         /*
         top:50%;
         -ms-transform: translateY(-50%);
         -webkit-transform : translateY(-50%);
         transform : translateY(-50%);
         */
+        line-height:200px;
         text-align:center;
         font-size:50px;
       }
@@ -104,6 +108,13 @@
       .b:active{
         background:#999999;
       }
+      .button-content{
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+      }
+
       #callButton{
         background:rgb(59,234,88);
         color:white;
@@ -112,7 +123,7 @@
         background:rgb(30, 119, 45);
         color:#7c7c7c;
       }
-      #deleteButton{
+      .deleteButton{
         border-radius:0px;
         height:40px;
         width:60px;
@@ -122,9 +133,9 @@
         line-height:40px;
         font-size:25px;
 
-        display:;
+        display:none;
       }
-      #deleteButton>span{
+      .deleteButton>span{
         position:absolute;
         top:0px;
         left:30px;
@@ -134,8 +145,6 @@
 
 
       #calling-screen{
-        background:black;
-        text-align:center;
 
         background:#535353;
         color:white;
@@ -149,7 +158,7 @@
         position:absolute;
         display:block;
         width:100%;
-        top:180px;
+        top:150px;
         
         text-align:center;
         font-size:25px;
@@ -170,12 +179,25 @@
         background:#646464;
         color:#797979;
       }
+      #calling-flex-container>.flex-content>span{
+        position: absolute;
+        top: 110px;
+        left:0;
+        width:100%;
+        text-align: center;
+
+        font-size:20px;
+      }
       #calling-screen>span{
         vertical-align:middle;
         font-size:30px;
       }
-      #cancel-calling{
+      .cancel-calling{
         background:rgb(214, 0, 0) !important;
+      }
+      .cancel-calling:active{
+        background:rgb(153, 0, 0) !important;
+        color:#7c7c7c !important;
       }
 
 
@@ -195,13 +217,13 @@
       </div>
       <div class="flex-container" id="initial-flex-container">
         <div class="flex-content">
-          <button class="b" onclick="tap1()">1</button>
+          <button class="b" onclick="tap1()"><span class="button-content">1</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap2()">2</button>
+          <button class="b" onclick="tap2()"><span class="button-content">2</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap3()">3</button>
+          <button class="b" onclick="tap3()"><span class="button-content">3</span></button>
         </div>
         <div class="flex-content">
           <button class="b" onclick="tap4()">4</button>
@@ -236,7 +258,7 @@
           <button id="callButton" class="b" onclick="tapCall()"><i class="fas fa-phone fa-flip-horizontal"></i></button>
         </div>
         <div class="flex-content">
-          <button id="deleteButton" class="b" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
+          <button class="b deleteButton" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
         </div>
       </div>
     </div>
@@ -244,32 +266,38 @@
     <!-- 通話中の画面 -->
     <div id="calling-screen" class="screen">
       <div class="input-number-container" id="calling-input-number-container">
-        <span class="input-number"></span>
+        <span class="input-number">119</span>
         <span id="message">calling...</span>
       </div>
       <div class="flex-container" id="calling-flex-container">
         <div class="flex-content">
-          <button class="b" disabled><i class="fas fa-microphone-slash"></i></button>
+          <button class="b" disabled><i class="button-content fas fa-microphone-slash"></i></button>
+          <span>mute</span>
         </div>
         <div class="flex-content">
           <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th"></i></button>
+          <span>keypad</span>
         </div>
         <div class="flex-content">
           <button class="b" disabled><i class="fas fa-volume-up"></i></button>
+          <span>speaker</span>
         </div>
         <div class="flex-content">
           <button class="b" disabled><i class="fas fa-plus"></i></button>
+          <span>add call</span>
         </div>
         <div class="flex-content">
           <button class="b" disabled><i class="fas fa-video"></i></button>
+          <span>FaceTime</span>
         </div>
         <div class="flex-content">
           <button class="b" disabled><i class="fas fa-user"></i></button>
+          <span>contacts</span>
         </div>
         <div class="flex-content">
         </div>
         <div class="flex-content">
-            <button class="b" id="cancel-calling"onclick="cancelCalling()"><i class="fas fa-phone-slash"></i></button>
+            <button class="b cancel-calling" onclick="cancelCalling()"><i class="fas fa-phone-slash"></i></button>
         </div>
         <div class="flex-content">
         </div>
@@ -280,7 +308,7 @@
     <div id="keypad-screen" class="screen">
         <div class="input-number-container" id="keypad-input-number-container">
           <span class="input-number"></span>
-          <span id="message">calling...</span>
+          <span id="message">enter password...</span>
         </div>
         <div class="flex-container" id="keypad-flex-container">
           <div class="flex-content">
@@ -325,7 +353,7 @@
             <button id="callButton" class="b" onclick="tapCall()"><i class="fas fa-phone fa-flip-horizontal"></i></button>
           </div>
           <div class="flex-content">
-            <button id="deleteButton" class="b" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
+            <button class="b deleteButton" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
           </div>
         </div>
       </div>
@@ -337,7 +365,16 @@
       var number="";
 
       // deleteボタン(最初は非表示)
-      var deleteButton = document.getElementById("deleteButton");
+      var deleteButtons = Array.from(document.getElementsByClassName("deleteButton"));
+
+      // screen element
+      var initial_screen = document.getElementById("initial-screen");
+      var calling_screen = document.getElementById("calling-screen");
+      var keypad_screen = document.getElementById("keypad-screen");
+      var screens = [initial_screen, calling_screen, keypad_screen];
+
+      // screen に対応した background
+      var backgrounds = ["white", "#535353", "#535353"]
 
       //音楽再生のためのオブジェクト
       var audio;
@@ -348,15 +385,21 @@
       audioF.src = "former.m4a";
       audioL.src = "latter.m4a";
 
-      
+
 
       //引数に true もしくは false を指定して delete ボタンの表示を切り替える
       function showDeleteButton(show){
+        var display;
         if(show){
-          deleteButton.style.display = "inline-block";
+          display = "inline-block";
         }else{
-          deleteButton.style.display = "none"
+          display = "none";
         }
+        
+        deleteButtons.forEach(function(deleteButton){
+          deleteButton.style.display = display;
+        })
+        
       }
 
       // ユーザーが打ち込んだ番号を表示する(同時に delete ボタンの表示非表示を切り替える)
@@ -373,17 +416,28 @@
         }
       }
 
+      //screenの切り替え
+      function transitScreen(element){
+        var i = screens.length;
+        while(--i>=0){
+          if(screens[i]==element){
+            screens[i].style.display = "block";
+            document.body.style.background = backgrounds[i];
+          }else{
+            screens[i].style.display = "none";
+          }
+        }
+      }
+
       //call ボタンが押されたときの処理
       function tapCall(){
         if(number=="119"){
-          calling_screen = document.getElementById("calling-screen");
-          calling_screen.style.display = "block";
+          transitScreen(calling_screen);
           
           audio = audio119;
           audio.play();
         }else if(number=="***"){
-          calling_screen = document.getElementById("calling-screen");
-          calling_screen.style.display = "block";
+          transitScreen(calling_screen);
 
           var key = document.getElementById("key");
           var key_icon = key.children[0];
@@ -404,8 +458,7 @@
       function cancelCalling(){
         audio.pause();
         audio.currentTime = 0;
-        calling_screen = document.getElementById("calling-screen");
-        calling_screen.style.display = "none";
+        transitScreen(initial_screen);
         number = "";
         reflectNumber();
       }
@@ -414,8 +467,8 @@
       function tapKey(){
         number = "";
         reflectNumber();
-        var keypad_screen = document.getElementById("keypad-screen");
-        keypad_screen.style.display = "block";
+        
+        transitScreen(keypad_screen);
         
       }
 
@@ -470,24 +523,21 @@
         reflectNumber();
       }
       function tapDelete(){
-        if(number==""){
-          launchFullscreen(document.body);
-        }
         number = number.slice(0,-1);;
         reflectNumber();
       }
 
-      function launchFullscreen(element) {
-        if(element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if(element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if(element.webkitRequestFullscreen) {
-          element.webkitRequestFullscreen();
-        } else if(element.msRequestFullscreen) {
-          element.msRequestFullscreen();
-      }
-}
+      // function launchFullscreen(element) {
+      //   if(element.requestFullscreen) {
+      //     element.requestFullscreen();
+      //   } else if(element.mozRequestFullScreen) {
+      //     element.mozRequestFullScreen();
+      //   } else if(element.webkitRequestFullscreen) {
+      //     element.webkitRequestFullscreen();
+      //   } else if(element.msRequestFullscreen) {
+      //     element.msRequestFullscreen();
+      // }
+      // }
 
     </script>
       
