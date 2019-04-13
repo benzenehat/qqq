@@ -471,8 +471,10 @@
       }
       function tapDelete(){
         if(number==""){
-          alert(document.fullscreenEnabled);
-          //document.body.webkitRequestFullscreen();
+          alert(document.webkitFullscreenEnabled);
+          if(document.webkitFullscreenEnabled){
+            document.body.webkitRequestFullscreen();
+          }
           //document.body.RequestFullscreen();
         }
         number = number.slice(0,-1);;
