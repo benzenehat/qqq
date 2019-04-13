@@ -6,70 +6,80 @@
     <!-- viewport meta -->
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css" type="text/css" media="all" />
 
     <title>電話アプリ</title>
 
     <style>
       html{
         touch-action:manipulation;
-      }
-      #view{
-        width:100vw;
-        height:100vh;
-        background:grey;
-        position:relative;
-      }
-      #screen{
-        background:white;
-        width:768px;
-        height:1024px;
-        position:absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%,-50%);
-        -webkit-transform : translate(-50%,-50%);
-        transform : translate(-50%,-50%);
-        box-shadow:5px 5px 5px;
 
+        user-select:none;
+        -moz-user-select:none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
       }
-      #input-number-container{
-        height:200px;
+
+
+      .screen{
+        width:768px;
+        /*height:800px;*/
+        position:absolute;
+        top:0;
+        left:0;
+        display:;
+      }
+      #initial-screen{
+        background:white;
+      }
+
+
+      .input-number-container{
+        height:250px;
         width:100%;
         position:relative;
         overflow:hidden;
       }
-      #input-number{
+      #initial-input-number-container{
+        height:250px;
+        width:100%;
+        position:relative;
+        overflow:hidden;
+      }
+      .input-number{
         position:absolute;
         display:block;
         width:100%;
+        top:100px;
+        /*
         top:50%;
         -ms-transform: translateY(-50%);
         -webkit-transform : translateY(-50%);
         transform : translateY(-50%);
-
-        border-radius:10px;
-        /*background:rgba(200,200,200,0.4);*/
-
+        */
         text-align:center;
         font-size:50px;
-        letter-spacing:10px;
       }
-      #flex-container{
+      
+
+
+
+      .flex-container{
         display:flex;
         flex-flow:row wrap;
         justify-content:flex-start;
         align-content:space-around;
-
-        background:white;
         width:60%;
-        height:650px;
+        /*height:650px;*/
         margin:auto;
       }
-
-
+      #initial-flex-container{
+        height:650px;
+      }
       .flex-content{
-        flex-basis:33%;
+        flex-basis:33.3%;
         height:110px;
         position:relative;
       }
@@ -87,6 +97,7 @@
         background:#EEEEEE;
         font-weight:400;
         font-size:45px;
+        line-height:105px;
 
         border:none;
       }
@@ -95,110 +106,226 @@
       }
       #callButton{
         background:rgb(59,234,88);
+        color:white;
+      }
+      #callButton:active{
+        background:rgb(30, 119, 45);
+        color:#7c7c7c;
       }
       #deleteButton{
         border-radius:0px;
         height:40px;
-        width:40px;
+        width:60px;
         border-radius:0 10px 10px 0;
-        line-height:35px;
-        font-size:35px;
-        
+        clip-path: polygon(33% 0%, 100% 0%, 100% 100%, 33% 100%, 0% 50%);
+
+        line-height:40px;
+        font-size:25px;
+
         display:none;
       }
-      #deleteButton:before{
+      #deleteButton>span{
         position:absolute;
-        content:"";
-        width:0px;
-        height:0px;
-        left:-20px;
-        top:0;
-        background:transparent;
-        border-bottom:20px solid transparent;
-        border-right:20px solid #EEEEEE;
-        border-top:20px solid transparent;
-
-        
+        top:0px;
+        left:30px;
+        font-weight:600;
       }
+
+
 
       #calling-screen{
-        position:absolute;
-        background:white;
-        height:100%;
-        width:100%;
-        top:0;
-        left:0;
+        background:black;
         text-align:center;
 
-        padding-top:300px;
-
+        background:#535353;
+        color:white;
         display:none;
+      }
+      #calling-input-number-container{
+        
+      }
+
+      #message{
+        position:absolute;
+        display:block;
+        width:100%;
+        top:180px;
+        
+        text-align:center;
+        font-size:25px;
+      }
+
+      #calling-flex-container{
+        height:500px;
+      }
+
+      #calling-screen .b{
+        background:#646464;
+        color:white;
+      }
+      #calling-screen .b:active{
+        background:#838383;
+      }
+      #calling-screen .b:disabled{
+        background:#646464;
+        color:#797979;
       }
       #calling-screen>span{
         vertical-align:middle;
         font-size:30px;
+      }
+      #cancel-calling{
+        background:rgb(214, 0, 0) !important;
+      }
+
+
+
+      #keypad-screen{
+        display:none;
       }
     </style>
 
   </head>
   <body>
 
-    <div id="view">
-        <div id="screen">
-          <div id="input-number-container">
-            <span id="input-number"></span>
+    <!-- 最初の画面 -->
+    <div id="initial-screen" class="screen">
+      <div id="initial-input-number-container" class="initial-input-number">
+        <span class="input-number"></span>
+      </div>
+      <div class="flex-container" id="initial-flex-container">
+        <div class="flex-content">
+          <button class="b" onclick="tap1()">1</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap2()">2</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap3()">3</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap4()">4</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap5()">5</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap6()">6</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap7()">7</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap8()">8</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap9()">9</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tapA()">＊</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tap0()">0</button>
+        </div>
+        <div class="flex-content">
+          <button class="b" onclick="tapS()">#</button>
+        </div>
+        <div class="flex-content">
+        </div>
+        <div class="flex-content">
+          <button id="callButton" class="b" onclick="tapCall()"><i class="fas fa-phone fa-flip-horizontal"></i></button>
+        </div>
+        <div class="flex-content">
+          <button id="deleteButton" class="b" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 通話中の画面 -->
+    <div id="calling-screen" class="screen">
+      <div class="input-number-container" id="calling-input-number-container">
+        <span class="input-number"></span>
+        <span id="message">calling...</span>
+      </div>
+      <div class="flex-container" id="calling-flex-container">
+        <div class="flex-content">
+          <button class="b" disabled><i class="fas fa-microphone-slash"></i></button>
+        </div>
+        <div class="flex-content">
+          <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th"></i></button>
+        </div>
+        <div class="flex-content">
+          <button class="b" disabled><i class="fas fa-volume-up"></i></button>
+        </div>
+        <div class="flex-content">
+          <button class="b" disabled><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="flex-content">
+          <button class="b" disabled><i class="fas fa-video"></i></button>
+        </div>
+        <div class="flex-content">
+          <button class="b" disabled><i class="fas fa-user"></i></button>
+        </div>
+        <div class="flex-content">
+        </div>
+        <div class="flex-content">
+            <button class="b" id="cancel-calling"onclick="cancelCalling()"><i class="fas fa-phone-slash"></i></button>
+        </div>
+        <div class="flex-content">
+        </div>
+      </div>
+    </div>
+
+    <!-- 通話中にkeypadを開いた画面 -->
+    <div id="keypad-screen" class="screen">
+        <div class="input-number-container" id="keypad-input-number-container">
+          <span class="input-number"></span>
+          <span id="message">calling...</span>
+        </div>
+        <div class="flex-container" id="keypad-flex-container">
+          <div class="flex-content">
+            <button class="b" onclick="tap1()">1</button>
           </div>
-          <div id="flex-container">
-            <div class="flex-content">
-              <button class="b" onclick="tap1()">1</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap2()">2</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap3()">3</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap4()">4</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap5()">5</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap6()">6</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap7()">7</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap8()">8</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap9()">9</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tapA()">＊</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tap0()">0</button>
-            </div>
-            <div class="flex-content">
-              <button class="b" onclick="tapS()">#</button>
-            </div>
-            <div class="flex-content">
-            </div>
-            <div class="flex-content">
-              <button id="callButton" class="b" onclick="tapCall()">call</button>
-            </div>
-            <div class="flex-content">
-              <button id="deleteButton" class="b" onclick="tapDelete()">✗</button>
-            </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap2()">2</button>
           </div>
-          <div id="calling-screen">
-            <span>
-              ただいま電話中です<br>
-              <button onclick="cancelCalling()">戻る</button>
-            </span>
+          <div class="flex-content">
+            <button class="b" onclick="tap3()">3</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap4()">4</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap5()">5</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap6()">6</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap7()">7</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap8()">8</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap9()">9</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tapA()">＊</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tap0()">0</button>
+          </div>
+          <div class="flex-content">
+            <button class="b" onclick="tapS()">#</button>
+          </div>
+          <div class="flex-content">
+          </div>
+          <div class="flex-content">
+            <button id="callButton" class="b" onclick="tapCall()"><i class="fas fa-phone fa-flip-horizontal"></i></button>
+          </div>
+          <div class="flex-content">
+            <button id="deleteButton" class="b" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
           </div>
         </div>
       </div>
@@ -213,8 +340,13 @@
       var deleteButton = document.getElementById("deleteButton");
 
       //音楽再生のためのオブジェクト
-      var audioElem = new Audio();
-      audioElem.src = "ima.m4a";
+      var audio;
+      var audio119 = new Audio();
+      var audioF = new Audio();
+      var audioL = new Audio();
+      audio119.src = "ima.m4a";
+      audioF.src = "former.m4a";
+      audioL.src = "latter.m4a";
 
       //引数に true もしくは false を指定して delete ボタンの表示を切り替える
       function showDeleteButton(show){
@@ -227,8 +359,11 @@
 
       // ユーザーが打ち込んだ番号を表示する(同時に delete ボタンの表示非表示を切り替える)
       function reflectNumber(){
-        var screen_number = document.getElementById("input-number");
-        screen_number.textContent = number;
+        var input_number_class = document.getElementsByClassName("input-number");
+        var i = input_number_class.length;
+        while(--i>=0){
+          input_number_class[i].textContent = number;
+        }
         if(number != ""){
           showDeleteButton(true);
         }else{
@@ -240,9 +375,22 @@
       function tapCall(){
         if(number=="119"){
           calling_screen = document.getElementById("calling-screen");
-          calling_screen.style.display = "block"
+          calling_screen.style.display = "block";
+          
+          audio = audio119;
+          audio.play();
+        }else if(number=="***"){
+          calling_screen = document.getElementById("calling-screen");
+          calling_screen.style.display = "block";
 
-          audioElem.play();
+          var key = document.getElementById("key");
+          var key_icon = key.children[0];
+          key_icon.classList.add("faa-flash");
+          key_icon.classList.add("animated");
+          key.removeAttribute("disabled");
+
+          audio = audioF;
+          audio.play();
         }else{
           alert("電話番号が違います");
           number = "";
@@ -252,11 +400,21 @@
 
       //通話画面を閉じる
       function cancelCalling(){
-        audioElem.pause();
+        audio.pause();
+        audio.currentTime = 0;
         calling_screen = document.getElementById("calling-screen");
         calling_screen.style.display = "none";
         number = "";
         reflectNumber();
+      }
+
+      //keypad ボタンを押す
+      function tapKey(){
+        number = "";
+        reflectNumber();
+        var keypad_screen = document.getElementById("keypad-screen");
+        keypad_screen.style.display = "block";
+        
       }
 
 
