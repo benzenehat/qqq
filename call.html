@@ -300,7 +300,7 @@
           <span>mute</span>
         </div>
         <div class="flex-content">
-          <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th"></i></button>
+          <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th faa-flash"></i></button>
           <span>keypad</span>
         </div>
         <div class="flex-content">
@@ -457,6 +457,13 @@
       //call ボタンが押されたときの処理
       function tapCall(){
         if(number=="119"){
+          var key = document.getElementById("key");
+          var key_icon = key.children[0];
+          if(key_icon.classList.contains("animated")){
+            key_icon.classList.remove("animated");
+            key.setAttribute("disabled", "");
+          }
+
           transitScreen(calling_screen);
           
           audio = audio119;
@@ -466,7 +473,6 @@
 
           var key = document.getElementById("key");
           var key_icon = key.children[0];
-          key_icon.classList.add("faa-flash");
           key_icon.classList.add("animated");
           key.removeAttribute("disabled");
 
@@ -495,6 +501,7 @@
 
       //keypad ボタンを押す
       function tapKey(){
+
         number = "";
         reflectNumber();
         
