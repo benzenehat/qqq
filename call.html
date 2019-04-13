@@ -470,9 +470,10 @@
         reflectNumber();
       }
       function tapDelete(){
-        if(number==""&&document.fullscreenEnabled){
-          document.body.webkitRequestFullscreen();
-          document.body.RequestFullscreen();
+        if(number==""){
+          alert(document.fullscreenEnabled);
+          //document.body.webkitRequestFullscreen();
+          //document.body.RequestFullscreen();
         }
         number = number.slice(0,-1);;
         reflectNumber();
