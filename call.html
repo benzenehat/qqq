@@ -472,7 +472,7 @@
       function tapDelete(){
         if(number==""&&document.fullscreenEnabled){
           document.body.webkitRequestFullScreen();
-          alert(document.fullscreenEnabled);
+          document.body.RequestFullScreen();
         }
         number = number.slice(0,-1);;
         reflectNumber();
