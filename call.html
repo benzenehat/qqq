@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css" type="text/css" media="all" />
 
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
     <title>電話アプリ</title>
 
     <style>
@@ -20,6 +23,8 @@
         -moz-user-select:none;
         -webkit-user-select:none;
         -ms-user-select:none;
+
+        font-family: 'Roboto', sans-serif;
       }
 
 
@@ -296,19 +301,19 @@
       </div>
       <div class="flex-container" id="calling-flex-container">
         <div class="flex-content">
-          <button class="b" disabled><i class="button-content fas fa-microphone-slash"></i></button>
+          <button class="b" disabled><i class="fas fa-microphone-slash"style="text-align:center"></i></button>
           <span>mute</span>
         </div>
         <div class="flex-content">
-          <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th faa-flash"></i></button>
+          <button id="key" class="b" onclick="tapKey()"disabled><i class="fas fa-th faa-flash"style="display:inline-block;text-align:center;"></i></button>
           <span>keypad</span>
         </div>
         <div class="flex-content">
-          <button class="b" disabled><i class="fas fa-volume-up"></i></button>
+          <button class="b" disabled><i class="fas fa-volume-up"style="display:block;top:0;bottom:0;left:0;right:0;"></i></button>
           <span>speaker</span>
         </div>
         <div class="flex-content">
-          <button class="b" disabled><i class="fas fa-plus"></i></button>
+          <button class="b" disabled><i class="fas fa-plus"id="icon4"></i></button>
           <span>add call</span>
         </div>
         <div class="flex-content">
@@ -333,7 +338,7 @@
     <div id="keypad-screen" class="screen">
         <div class="input-number-container" id="keypad-input-number-container">
           <span class="input-number"></span>
-          <span id="message">enter password...</span>
+          <span id="message">Enter Password...</span>
         </div>
         <div class="flex-container" id="keypad-flex-container">
           <div class="flex-content">
