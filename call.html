@@ -421,6 +421,15 @@
       audioL.src = "latter.m4a";
 
 
+      //ボタンサウンド
+      var button_sound = new Audio();
+      var tap_sound = new Audio();
+      var delete_sound = new Audio();
+      tap_sound.src = "cursor2.mp3";
+      delete_sound.src = "cursor9.mp3";
+      
+
+
 
       //引数に true もしくは false を指定して delete ボタンの表示を切り替える
       function showDeleteButton(show){
@@ -574,11 +583,21 @@
 
 
       function tapDelete(){
+
+        stopAudio(button_sound);
+        button_sound = delete_sound;
+        button_sound.play();
+
         number = number.slice(0,-1);;
         reflectNumber();
       }
 
       function tap(n){
+
+        stopAudio(button_sound);
+        button_sound = tap_sound;
+        button_sound.play();
+
         number = number + n;
         reflectNumber();
 
