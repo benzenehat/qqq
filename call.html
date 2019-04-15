@@ -106,7 +106,7 @@
         background:#EEEEEE;
         font-weight:400;
         font-size:45px;
-        line-height:105px;
+        font-family:'Roboto', sans-serif; 
 
         -webkit-appearance:none;
 
@@ -252,40 +252,40 @@
       </div>
       <div class="flex-container" id="initial-flex-container">
         <div class="flex-content">
-          <button class="b" onclick="tap1()"><span class="button-content">1</span></button>
+          <button class="b" onclick="tap(1)"><span class="button-content">1</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap2()"><span class="button-content">2</span></button>
+          <button class="b" onclick="tap(2)"><span class="button-content">2</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap3()"><span class="button-content">3</span></button>
+          <button class="b" onclick="tap(3)"><span class="button-content">3</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap4()"><span class="button-content">4</span></button>
+          <button class="b" onclick="tap(4)"><span class="button-content">4</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap5()"><span class="button-content">5</span></button>
+          <button class="b" onclick="tap(5)"><span class="button-content">5</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap6()"><span class="button-content">6</span></button>
+          <button class="b" onclick="tap(6)"><span class="button-content">6</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap7()"><span class="button-content">7</span></button>
+          <button class="b" onclick="tap(7)"><span class="button-content">7</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap8()"><span class="button-content">8</span></button>
+          <button class="b" onclick="tap(8)"><span class="button-content">8</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap9()"><span class="button-content">9</span></button>
+          <button class="b" onclick="tap(9)"><span class="button-content">9</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tapA()"><span class="button-content">＊</span></button>
+          <button class="b" onclick="tap('*')"><span class="button-content">*</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tap0()"><span class="button-content">0</span></button>
+          <button class="b" onclick="tap(0)"><span class="button-content">0</span></button>
         </div>
         <div class="flex-content">
-          <button class="b" onclick="tapS()"><span class="button-content">#</span></button>
+          <button class="b" onclick="tap('#')"><span class="button-content">#</span></button>
         </div>
         <div class="flex-content">
         </div>
@@ -347,40 +347,40 @@
         </div>
         <div class="flex-container" id="keypad-flex-container">
           <div class="flex-content">
-            <button class="b" onclick="tap1()"><span class="button-content">1</span></button>
+            <button class="b" onclick="tap(1)"><span class="button-content">1</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap2()"><span class="button-content">2</span></button>
+            <button class="b" onclick="tap(2)"><span class="button-content">2</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap3()"><span class="button-content">3</span></button>
+            <button class="b" onclick="tap(3)"><span class="button-content">3</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap4()"><span class="button-content">4</span></button>
+            <button class="b" onclick="tap(4)"><span class="button-content">4</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap5()"><span class="button-content">5</span></button>
+            <button class="b" onclick="tap(5)"><span class="button-content">5</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap6()"><span class="button-content">6</span></button>
+            <button class="b" onclick="tap(6)"><span class="button-content">6</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap7()"><span class="button-content">7</span></button>
+            <button class="b" onclick="tap(7)"><span class="button-content">7</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap8()"><span class="button-content">8</span></button>
+            <button class="b" onclick="tap(8)"><span class="button-content">8</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap9()"><span class="button-content">3</span></button>
+            <button class="b" onclick="tap(9)"><span class="button-content">9</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tapA()"><span class="button-content">＊</span></button>
+            <button class="b" onclick="tap('*')"><span class="button-content">＊</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tap0()"><span class="button-content">0</span></button>
+            <button class="b" onclick="tap(0)"><span class="button-content">0</span></button>
           </div>
           <div class="flex-content">
-            <button class="b" onclick="tapS()"><span class="button-content">#</span></button>
+            <button class="b" onclick="tap('#')"><span class="button-content">#</span></button>
           </div>
           <div class="flex-content">
           </div>
@@ -388,7 +388,7 @@
               <button class="b cancel-calling" onclick="cancelCalling()"><i class="button-content fas fa-phone-slash"></i></button>
           </div>
           <div class="flex-content">
-            <button class="b deleteButton" onclick="tapDelete()"><span><i class="button-content fas fa-times"></i></span></button>
+            <button class="b deleteButton" onclick="tapDelete()"><span><i class="fas fa-times"></i></span></button>
           </div>
         </div>
       </div>
@@ -520,6 +520,7 @@
       }
 
 
+      /*
       function tap1(){
         number = number+1;
         reflectNumber();
@@ -527,12 +528,6 @@
       function tap2(){
         number = number+2;
         reflectNumber();
-        
-        if(audio==audioF&&number==302){
-          stopAudio(audio);
-          audio=audioL;
-          audioL.play();
-        }
       }
       function tap3(){
         number = number+3;
@@ -574,9 +569,33 @@
         number = number + "#";
         reflectNumber();
       }
+
+      */
+
+
       function tapDelete(){
         number = number.slice(0,-1);;
         reflectNumber();
+      }
+
+      function tap(n){
+        number = number + n;
+        reflectNumber();
+
+        if(audio==audioF && number.length==3){
+          if(number==302){
+            stopAudio(audio);
+            audio=audioL;
+            audioL.play()
+          }else{
+            stopAudio(audio);
+            audio=audio119;
+            number="";
+            reflectNumber();
+            alert('invalid password');
+            transitScreen(initial_screen);
+          }
+        }
       }
 
       // function launchFullscreen(element) {
