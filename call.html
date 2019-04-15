@@ -422,7 +422,6 @@
 
 
       //ボタンサウンド
-      var button_sound = new Audio();
       var tap_sound = new Audio();
       var delete_sound = new Audio();
       tap_sound.src = "cursor2.mp3";
@@ -584,9 +583,7 @@
 
       function tapDelete(){
 
-        stopAudio(button_sound);
-        button_sound = delete_sound;
-        button_sound.play();
+        delete_sound.play();
 
         number = number.slice(0,-1);;
         reflectNumber();
@@ -594,9 +591,7 @@
 
       function tap(n){
 
-        stopAudio(button_sound);
-        button_sound = tap_sound;
-        button_sound.play();
+        tap_sound.play();
 
         number = number + n;
         reflectNumber();
