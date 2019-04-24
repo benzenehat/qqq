@@ -567,10 +567,12 @@
           
           audio = audio119;
           audio.play();
+          audio.addEventListener("ended",cancelCalling);
         }else if(number=="***"){
           transitScreen(calling_screen);
           audio = audioVoice;
           audio.play();
+          audio.addEventListener("ended",cancelCalling);
           /*
           transitScreen(calling_screen);
 
