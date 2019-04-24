@@ -150,6 +150,59 @@
         font-weight:600;
       }
 
+      /* alert 画面 */
+      #alert-background{
+        position:absolute;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        background:rgba(0,0,0,0.3);
+
+        display:none;
+      }
+      #alert{
+        position:absolute;
+        top:50%;
+        left:50%;
+        -ms-transform:translate(-50%,-50%);
+        -webkit-transform:translate(-50%,-50%);
+        transform:translate(-50%,-50%);
+
+
+        box-shadow:#646464 5px 5px 10px;
+        text-align:center;
+        border-radius:20px;
+
+        padding:20px 40px 50px 40px;
+
+        background:white;
+        color:black;
+
+        overflow:hidden;
+
+      }
+      #alert-message{
+        margin:0;
+        font-size:20px;
+        font-weight:600;
+      }
+      #alert-button{
+        position:absolute;
+        left:0;
+        bottom:0;
+        width:100%;
+        height:40px;
+
+        -webkit-appearance:none;
+        border:none;
+        border-top:solid #DDDDDD 1px;
+
+        font-size:20px;
+
+        color:rgb(34, 135, 194);
+      }
+
 
 
       #calling-screen{
@@ -298,6 +351,14 @@
       </div>
     </div>
 
+    <!-- alert画面(実装) -->
+    <div id="alert-background">
+      <div id="alert">
+        <h2 id="alert-message">電話番号が違います</h2>
+        <button id="alert-button" onclick="alertOK()">OK</button>
+      </div>
+    </div>
+
     <!-- 通話中の画面 -->
     <div id="calling-screen" class="screen">
       <div class="input-number-container" id="calling-input-number-container">
@@ -414,18 +475,26 @@
       //音楽再生のためのオブジェクト
       var audio;
       var audio119 = new Audio();
+      var audioVoice = new Audio();
+      /*
       var audioF = new Audio();
       var audioL = new Audio();
-      audio119.src = "ima.m4a";
+      */
+      audio119.src = "119.m4a";
+      audioVoice.src = "voice.m4a";
+      /*
       audioF.src = "former.m4a";
       audioL.src = "latter.m4a";
+      */
 
 
       //ボタンサウンド
+      /*
       var tap_sound = new Audio();
       var delete_sound = new Audio();
       tap_sound.src = "cursor2.mp3";
       delete_sound.src = "cursor9.mp3";
+      */
       
 
 
@@ -459,6 +528,16 @@
         }
       }
 
+      //alert画面を出す(displayにはboleanが入る)
+      function displayAlert(display){
+        var alert = document.getElementById("alert-background");
+        if(display){
+          alert.style.display = "block"
+        }else{
+          alert.style.display = "none"
+        }
+      }
+
       //screenの切り替え
       function transitScreen(element){
         var i = screens.length;
@@ -475,18 +554,24 @@
       //call ボタンが押されたときの処理
       function tapCall(){
         if(number=="119"){
+          /*
           var key = document.getElementById("key");
           var key_icon = key.children[0];
           if(key_icon.classList.contains("animated")){
             key_icon.classList.remove("animated");
             key.setAttribute("disabled", "");
           }
+          */
 
           transitScreen(calling_screen);
           
           audio = audio119;
           audio.play();
         }else if(number=="***"){
+          transitScreen(calling_screen);
+          audio = audioVoice;
+          audio.play();
+          /*
           transitScreen(calling_screen);
 
           var key = document.getElementById("key");
@@ -496,8 +581,14 @@
 
           audio = audioF;
           audio.play();
+          */
         }else{
+          /*
           alert("電話番号が違います");
+          */
+
+
+          displayAlert(true);
           number = "";
           reflectNumber()
         }
@@ -528,62 +619,11 @@
       }
 
 
-      /*
-      function tap1(){
-        number = number+1;
-        reflectNumber();
-      }
-      function tap2(){
-        number = number+2;
-        reflectNumber();
-      }
-      function tap3(){
-        number = number+3;
-        reflectNumber();
-      }
-      function tap4(){
-        number = number+4;
-        reflectNumber();
-      }
-      function tap5(){
-        number = number+5;
-        reflectNumber();
-      }
-      function tap6(){
-        number = number+6;
-        reflectNumber();
-      }
-      function tap7(){
-        number = number+7;
-        reflectNumber();
-      }
-      function tap8(){
-        number = number+8;
-        reflectNumber();
-      }
-      function tap9(){
-        number = number+9;
-        reflectNumber();
-      }
-      function tap0(){
-        number = number+0;
-        reflectNumber();
-      }
-      function tapA(){
-        number = number + "*";
-        reflectNumber();
-      }
-      function tapS(){
-        number = number + "#";
-        reflectNumber();
-      }
-
-      */
 
 
       function tapDelete(){
 
-        delete_sound.play();
+        //delete_sound.play();
 
         number = number.slice(0,-1);;
         reflectNumber();
@@ -591,11 +631,11 @@
 
       function tap(n){
 
-        tap_sound.play();
+        //tap_sound.play();
 
         number = number + n;
         reflectNumber();
-
+        /*
         if(audio==audioF && number.length==3){
           if(number==302){
             stopAudio(audio);
@@ -610,19 +650,14 @@
             transitScreen(initial_screen);
           }
         }
+        */
       }
 
-      // function launchFullscreen(element) {
-      //   if(element.requestFullscreen) {
-      //     element.requestFullscreen();
-      //   } else if(element.mozRequestFullScreen) {
-      //     element.mozRequestFullScreen();
-      //   } else if(element.webkitRequestFullscreen) {
-      //     element.webkitRequestFullscreen();
-      //   } else if(element.msRequestFullscreen) {
-      //     element.msRequestFullscreen();
-      // }
-      // }
+      function alertOK(){
+        displayAlert(false);
+      }
+
+
 
     </script>
       
